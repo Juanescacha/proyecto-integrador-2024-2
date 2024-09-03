@@ -15,15 +15,23 @@ const Login = () => {
 	}, [observeAuthState])
 
 	useEffect(() => {
-		if (user) {
-			const newUser = {
-				email: user.email,
-				name: user.displayName,
-				photo: user.photoURL,
+		const registerUser = async () => {
+			if (user) {
+				const newUser = {
+					email: user.email,
+					name: user.displayName,
+					photo: user.photoURL,
+				}
+				const { success: userExists } = await UserDAO.getUserByEmail(
+					newUser.email,
+				)
+				if (!userExists) {
+					await UserDAO.createUser(newUser)
+				}
 			}
-			UserDAO.createUser(newUser)
-			navigate("/world")
 		}
+
+		registerUser()
 	}, [user, navigate])
 
 	const handleLogin = useCallback(() => {
@@ -45,7 +53,8 @@ const Login = () => {
 					<p className="welcome-text">
 						Bienvenido, {user.displayName}
 					</p>
-					<button className="button-logout" onClick={handleLogout}>
+					<button onClick={() => navigate("/world")}>Mundo 3D</button>
+					<button className="logout-button" onClick={handleLogout}>
 						Cerrar sesión
 					</button>
 				</>

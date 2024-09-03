@@ -4,11 +4,12 @@
 	align-items: center;
 	justify-content: center;
 	height: 100vh;
+	gap: 20px;
 }
 
 .welcome-text {
 	font-size: x-large;
-	color: #333;
+	color: #fff;
 }
 
 .loading-text {

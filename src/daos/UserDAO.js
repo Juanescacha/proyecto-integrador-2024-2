@@ -2,9 +2,12 @@ import {
 	collection,
 	doc,
 	getDoc,
+	getDocs,
 	deleteDoc,
 	updateDoc,
 	addDoc,
+	query,
+	where,
 } from "firebase/firestore"
 import { db } from "~/firebase.config"
 
@@ -24,6 +27,22 @@ class UserDAO {
 			}
 		} catch (error) {
 			console.log("Error getting document: ", error)
+		}
+	}
+
+	async getUserByEmail(email) {
+		try {
+			const q = query(this.collectionRef, where("email", "==", email))
+			const querySnapshot = await getDocs(q)
+
+			if (!querySnapshot.empty) {
+				const userDoc = querySnapshot.docs[0]
+				return { success: true, data: userDoc.data(), id: userDoc.id }
+			} else {
+				return { success: false, data: null }
+			}
+		} catch (error) {
+			console.log("Error getting document by email: ", error)
 		}
 	}
 
