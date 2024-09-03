@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unknown-property */
-import { OrbitControls } from "@react-three/drei"
+import { TrackballControls } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 import Cube from "@/Cube"
 
@@ -9,9 +9,13 @@ const World = () => {
 	return (
 		<>
 			<Canvas camera={cameraSettings}>
-				<OrbitControls enablePan={false} />
-				<ambientLight intensity={1.7} />
-				<directionalLight position={[0, 10, 0]} />
+				<TrackballControls />
+				<ambientLight intensity={0.2} />
+				<directionalLight
+					color="red"
+					intensity={30}
+					position={[0, 10, 10]}
+				/>
 				<Cube />
 			</Canvas>
 		</>

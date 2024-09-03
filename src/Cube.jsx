@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import { useRef } from "react"
 import { useFrame } from "@react-three/fiber"
 
@@ -17,8 +18,8 @@ const Cube = () => {
 
 	return (
 		<mesh ref={meshRef}>
-			<boxGeometry args={[1, 1, 1]} />
-			<meshStandardMaterial color="royalblue" />
+			<boxGeometry args={[1, 1, 5]} />
+			<meshPhongMaterial color="blue" />
 		</mesh>
 	)
 }
