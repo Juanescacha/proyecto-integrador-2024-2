@@ -2,18 +2,21 @@
 import { OrbitControls } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 
+
+const settingsCamera = { position: [2, 0, 5], fov: 75 };
+
 const World = () => {
-	const cameraSettings = { position: [2, 0, 5] }
+  return (
+    <>
+      <h1 className="title">pablito clavo un clavito</h1>
+      <Canvas camera={settingsCamera}>
+        <OrbitControls enablePan={false} />
+        <ambientLight intensity={1.7} />
+        <directionalLight position={[0, 10, 0]} />
+        <Cube/>
+      </Canvas>
+    </>
+  );
+};
 
-	return (
-		<>
-			<Canvas camera={cameraSettings}>
-				<OrbitControls />
-				<ambientLight intensity={1.5} />
-				<directionalLight position={[0, 10, 10]} />
-			</Canvas>
-		</>
-	)
-}
-
-export default World
+export default World;
