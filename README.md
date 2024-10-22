@@ -9,4 +9,5 @@ Es un proyecto que busca crear un mundo virtual en el que los usuarios puedan in
 ## Integrantes
 
 Juan Esteban Camargo - 1924984
+
 Natan Gabriel Medina Corea - 2178208
