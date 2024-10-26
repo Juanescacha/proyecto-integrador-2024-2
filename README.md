@@ -6,3 +6,8 @@
 -   **Código:** 1924984
 -   **Correo:** camargo.juan@correounivalle.edu.co
 -   **Usuario GitHub:** juanescacha
+
+-   **Nombre:** Natan Gabriel Medina
+-   **Código:** 2178208
+-   **Correo:** natan.medina@correounivalle.edu.co
+-   **Usuario GitHub:** natanMedina
