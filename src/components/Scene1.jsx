@@ -1,7 +1,8 @@
-import { useGLTF } from "@react-three/drei"
+import { useGLTF} from "@react-three/drei"
 
 const Scene1 = (props) => {
 	const { nodes, materials } = useGLTF("/models/scene1.glb")
+
 	return (
 		<group {...props} dispose={null}>
 			<mesh
