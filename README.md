@@ -8,12 +8,6 @@ Es un proyecto que busca crear un mundo virtual en el que los usuarios puedan in
 
 ## Integrantes
 
--   **Nombre:** Juan Esteban Camargo
--   **Código:** 1924984
--   **Correo:** camargo.juan@correounivalle.edu.co
--   **Usuario GitHub:** juanescacha
+Juan Esteban Camargo - 1924984
 
--   **Nombre:** Natan Gabriel Medina Corea
--   **Código:** 2178208
--   **Correo:** natan.medina@correounivalle.edu.co
--   **Usuario GitHub:** natanMedina
+Natan Gabriel Medina Corea - 2178208
