@@ -124,12 +124,12 @@ const Introduction = () => {
 					{/*	disableSliders>*/}
 					{/*</PivotControls>*/}
 					<KingRacoon position={[0, 2.5, 0]} />
-					<GizmoHelper alignment="bottom-right" margin={[80, 80]}>
-						<GizmoViewport
-							axisColors={["#9d4b4b", "#2f7f4f", "#3b5b9d"]}
-							labelColor="white"
-						/>
-					</GizmoHelper>
+					{/*<GizmoHelper alignment="bottom-right" margin={[80, 80]}>*/}
+					{/*	<GizmoViewport*/}
+					{/*		axisColors={["#9d4b4b", "#2f7f4f", "#3b5b9d"]}*/}
+					{/*		labelColor="white"*/}
+					{/*	/>*/}
+					{/*</GizmoHelper>*/}
 					<ambientLight intensity={1} />
 					<directionalLight intensity={0.5} position={[10, 10, 10]} />
 					{/*<Environment preset="warehouse" />*/}
