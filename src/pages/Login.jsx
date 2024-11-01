@@ -9,11 +9,11 @@ import {
 	OrbitControls,
 	PerspectiveCamera,
 } from "@react-three/drei"
-import Scene1 from "@/components/Scene1.jsx"
-import Background from "@/components/Background"
-import KingRacoon from "@/components/KingRacoon.jsx"
-import Deforestation from "@/components/Deforestation.jsx"
-import Camp from "@/components/Camp.jsx"
+import Forest from "@/components/Forest"
+import Mountain from "@/components/Mountain"
+import KingRacoon from "@/components/KingRacoon"
+import Deforestation from "@/components/Deforestation"
+import Camp from "@/components/Camp"
 
 const Login = () => {
 	const { user, loginGoogleWithPopup, logout, observeAuthState, loading } =
@@ -83,7 +83,7 @@ const Login = () => {
 						autoRotateSpeed={0.2}
 					/>
 					<Center>
-						<Scene1 />
+						<Forest />
 					</Center>
 					<ambientLight intensity={1} />
 					<directionalLight intensity={0.5} position={[10, 10, 10]} />

@@ -7,12 +7,12 @@ import {
 	PerspectiveCamera,
 	PivotControls,
 } from "@react-three/drei"
-import Scene1 from "@/components/Scene1"
+import Forest from "@/components/Forest"
 import KingRacoon from "@/components/KingRacoon"
 import { Leva, useControls } from "leva"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import Background from "@/components/Background.jsx"
+import Mountain from "@/components/Mountain"
 
 const Tutorial = () => {
 	const navigate = useNavigate()
@@ -113,8 +113,8 @@ const Introduction = () => {
 						rotation={camera.rotation}
 					/>
 					{/*<OrbitControls makeDefault position={[10, 10, 10]} />*/}
-					<Scene1 />
-					<Background scale={200} position={[400, -50, -300]} />
+					<Forest />
+					<Mountain scale={200} position={[400, -50, -300]} />
 					{/*<PivotControls*/}
 					{/*	visible={true}*/}
 					{/*	annotations*/}
