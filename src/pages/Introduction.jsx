@@ -112,7 +112,7 @@ const Introduction = () => {
 						position={camera.position}
 						rotation={camera.rotation}
 					/>
-					{/*<OrbitControls makeDefault position={[10, 10, 10]} />*/}
+					{/*<OrbitControls makeDefault />*/}
 					<Forest />
 					<Mountain scale={200} position={[400, -50, -300]} />
 					{/*<PivotControls*/}
@@ -130,9 +130,22 @@ const Introduction = () => {
 					{/*		labelColor="white"*/}
 					{/*	/>*/}
 					{/*</GizmoHelper>*/}
-					<ambientLight intensity={1} />
-					<directionalLight intensity={0.5} position={[10, 10, 10]} />
-					{/*<Environment preset="warehouse" />*/}
+					<directionalLight
+						castShadow
+						shadow-mapSize-width={2048}
+						shadow-mapSize-height={2048}
+						intensity={5}
+						shadow-bias={-0.0006}
+						// shadow-normalBias={0.05}
+						position={[-55, 40, 10]}>
+						<orthographicCamera
+							attach="shadow-camera"
+							args={[-50, 30, 50, -5, -5, 200]}>
+							{/*<Helper type={CameraHelper} />*/}
+						</orthographicCamera>
+						{/*<Helper type={DirectionalLightHelper} />*/}
+					</directionalLight>
+					<ambientLight intensity={0.7} />
 				</Canvas>
 			</div>
 			<div className="flex h-screen flex-col items-end justify-start overflow-hidden">
