@@ -1,7 +1,7 @@
-import { useGLTF} from "@react-three/drei"
+import { useGLTF } from "@react-three/drei"
 
-const Scene1 = (props) => {
-	const { nodes, materials } = useGLTF("/models/scene1.glb")
+const Forest = (props) => {
+	const { nodes, materials } = useGLTF("/models/forest.glb")
 
 	return (
 		<group {...props} dispose={null}>
@@ -1070,6 +1070,6 @@ const Scene1 = (props) => {
 		</group>
 	)
 }
-useGLTF.preload("/models/scene1.glb")
+useGLTF.preload("/models/forest.glb")
 
-export default Scene1
+export default Forest

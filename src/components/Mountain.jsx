@@ -1,6 +1,6 @@
 import { useGLTF } from "@react-three/drei"
 
-const Background = (props) => {
+const Mountain = (props) => {
 	const { nodes, materials } = useGLTF("/models/mountain.glb")
 
 	return (
@@ -27,4 +27,4 @@ const Background = (props) => {
 
 useGLTF.preload("/models/mountain.glb")
 
-export default Background
+export default Mountain
