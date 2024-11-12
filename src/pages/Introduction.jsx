@@ -13,6 +13,7 @@ import { Leva, useControls } from "leva"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Background from "@/components/Background.jsx"
+import Staging from "../components/staging/Staging"
 
 const Tutorial = () => {
 	const navigate = useNavigate()
@@ -107,6 +108,7 @@ const Introduction = () => {
 			<Leva hidden />
 			<div className="absolute inset-0 -z-10 h-full w-full">
 				<Canvas shadows>
+					<Staging/>
 					<PerspectiveCamera
 						makeDefault
 						position={camera.position}
