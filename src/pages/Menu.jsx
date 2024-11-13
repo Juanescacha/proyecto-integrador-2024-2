@@ -1,76 +1,112 @@
-import { Canvas } from "@react-three/fiber"
+import { Canvas, useFrame, useThree } from "@react-three/fiber"
+import { Perf } from "r3f-perf"
 import {
-	Environment,
 	GizmoHelper,
 	GizmoViewport,
+	Helper,
 	OrbitControls,
 	PerspectiveCamera,
 	PivotControls,
-	SoftShadows,
 } from "@react-three/drei"
-import Scene1 from "@/components/Scene1"
-import KingRacoon from "@/components/KingRacoon"
-import { Leva, useControls } from "leva"
-import { useState } from "react"
+import Forest from "@/components/Forest.jsx"
 import { useNavigate } from "react-router-dom"
-import Background from "@/components/Background.jsx"
-import Deforestation from "@/components/Deforestation.jsx"
-import Camp from "@/components/Camp.jsx"
+import Mountain from "@/components/Mountain"
+import Deforestation from "@/components/Deforestation"
+import Camp from "@/components/Camp"
+import { CameraHelper, DirectionalLightHelper } from "three"
+import { useEffect, useRef } from "react"
+import Staging from "@/components/staging/Staging.jsx"
+
+const Camera = () => {
+	const { camera } = useThree()
+	const ref = useRef()
+
+	useEffect(() => {
+		// window.addEventListener("keydown", (event) => {
+		// 	console.log("pos: ", camera.position)
+		// 	console.log("target: ", ref.current?.target)
+		// })
+	}, [])
+
+	return <OrbitControls makeDefault ref={ref} target={[9.99, 9.68, 2.95]} />
+}
+
+const Lights = () => {
+	return (
+		<>
+			<directionalLight
+				castShadow
+				shadow-mapSize-width={2048}
+				shadow-mapSize-height={2048}
+				intensity={5}
+				position={[-55, 40, 10]}
+				shadow-bias={-0.0006}
+				// shadow-normalBias={0.05}
+			>
+				<orthographicCamera
+					attach="shadow-camera"
+					args={[-50, 30, 50, -5, -5, 200]}>
+					{/*<Helper type={CameraHelper} />*/}
+				</orthographicCamera>
+				{/*<Helper type={DirectionalLightHelper} />*/}
+			</directionalLight>
+			<ambientLight intensity={0.7} />
+		</>
+	)
+}
+
+const Models = () => {
+	return (
+		<>
+			<Forest />
+			<Mountain scale={200} position={[400, -50, -300]} />
+			<Camp position={[10, 2.7, -15]} />
+			<Deforestation position={[30, 2.5, 1]} rotation={[0, 4, 0]} />
+			<Lights />
+			{/*	Additional Debugging */}
+			<PivotControls
+				visible={true}
+				annotations
+				scale={1}
+				anchor={[0, 0, 0]}
+				depthTest={false}></PivotControls>
+		</>
+	)
+}
+
+const Scene = () => {
+	return (
+		<Canvas
+			shadows
+			camera={{
+				position: [0.54, 10.06, 14.03],
+			}}>
+			<Camera />
+			<Models />
+			<Staging />
+
+			{/*
+			<GizmoHelper alignment="bottom-right" margin={[80, 80]}>
+				<GizmoViewport
+					axisColors={["#9d4b4b", "#2f7f4f", "#3b5b9d"]}
+					labelColor="white"
+				/>
+			</GizmoHelper>
+			*/}
+			{/*<Perf position="top-left" />*/}
+		</Canvas>
+	)
+}
 
 const Menu = () => {
-	const [step, setStep] = useState(false)
-
 	const navigate = useNavigate()
-
-	const camera = useControls({
-		position: [-1, 4.7, 6.9],
-		rotation: [0, -0.7, 0],
-	})
-
-	const handleNext = () => {
-		setStep(true)
-	}
 
 	return (
 		<>
-			<Leva hidden />
 			<div className="absolute inset-0 -z-10 h-full w-full">
-				<Canvas shadows>
-					{/*<OrbitControls makeDefault />*/}
-					<PerspectiveCamera
-						makeDefault
-						position={camera.position}
-						rotation={camera.rotation}
-					/>
-					<Scene1 />
-					<Background scale={200} position={[400, -50, -300]} />
-					{/*<PivotControls*/}
-					{/*	visible={true}*/}
-					{/*	annotations*/}
-					{/*	scale={1}*/}
-					{/*	anchor={[0, 0, 0]}*/}
-					{/*	depthTest={false}*/}
-					{/*	disableSliders></PivotControls>*/}
-					<Camp position={[10, 2.7, -15]} />
-
-					<Deforestation
-						position={[30, 2.5, 1]}
-						rotation={[0, 4, 0]}
-						scale={0.2}
-					/>
-
-					{/*<GizmoHelper alignment="bottom-right" margin={[80, 80]}>*/}
-					{/*	<GizmoViewport*/}
-					{/*		axisColors={["#9d4b4b", "#2f7f4f", "#3b5b9d"]}*/}
-					{/*		labelColor="white"*/}
-					{/*	/>*/}
-					{/*</GizmoHelper>*/}
-					<ambientLight intensity={1} />
-					<directionalLight intensity={0.5} position={[10, 10, 10]} />
-					{/*<Environment preset="warehouse" />*/}
-				</Canvas>
+				<Scene />
 			</div>
-			<div className="flex h-screen flex-col items-start justify-start overflow-hidden">
+			<div className="flex-col items-start justify-start overflow-hidden">
 				<nav className="flex w-full items-center justify-between bg-[#5C5C5C] px-5 py-2">
 					<button
 						type="button"
@@ -103,9 +139,9 @@ const Menu = () => {
 						</button>
 					</div>
 				</nav>
-				<div className="mt-10 flex flex-col gap-10">
+				<div className="mt-10 flex flex-col items-start gap-10">
 					<div className="rounded-r-full bg-[#102C3E] p-6 text-3xl uppercase text-white">
-						selecciona la problematica
+						selecciona la problemática
 					</div>
 				</div>
 			</div>

@@ -3,17 +3,56 @@ import useAuthStore from "@/stores/use-auth-store.js"
 import UserDAO from "@/daos/UserDAO.js"
 import { useNavigate } from "react-router-dom"
 import { Canvas } from "@react-three/fiber"
-import {
-	Center,
-	Html,
-	OrbitControls,
-	PerspectiveCamera,
-} from "@react-three/drei"
-import Scene1 from "@/components/Scene1.jsx"
-import Background from "@/components/Background"
-import KingRacoon from "@/components/KingRacoon.jsx"
-import Deforestation from "@/components/Deforestation.jsx"
-import Camp from "@/components/Camp.jsx"
+import { Center, Helper, OrbitControls } from "@react-three/drei"
+import Forest from "@/components/Forest"
+import { CameraHelper, DirectionalLightHelper } from "three"
+import Staging from "@/components/staging/Staging.jsx"
+
+const Scene = () => {
+	return (
+		<Canvas shadows camera={{ position: [100, 0, 3] }}>
+			<OrbitControls
+				enableZoom={false}
+				autoRotate
+				autoRotateSpeed={0.2}
+			/>
+			<Models />
+			<Lights />
+			<Staging />
+		</Canvas>
+	)
+}
+
+const Lights = () => {
+	return (
+		<>
+			<directionalLight
+				castShadow
+				shadow-mapSize-width={2048}
+				shadow-mapSize-height={2048}
+				intensity={5}
+				position={[-55, 40, 10]}
+				// shadow-bias={-0.01}
+				shadow-normalBias={0.5}>
+				<orthographicCamera
+					attach="shadow-camera"
+					args={[-300, 300, 300, -300, -300, 300]}>
+					{/*<Helper type={CameraHelper} />*/}
+				</orthographicCamera>
+				{/*<Helper type={DirectionalLightHelper} />*/}
+			</directionalLight>
+			<ambientLight intensity={0.7} />
+		</>
+	)
+}
+
+const Models = () => {
+	return (
+		<Center>
+			<Forest />
+		</Center>
+	)
+}
 
 const Login = () => {
 	const { user, loginGoogleWithPopup, logout, observeAuthState, loading } =
@@ -46,9 +85,10 @@ const Login = () => {
 	}, [user, navigate])
 
 	const handleLogin = useCallback(() => {
-		loginGoogleWithPopup().then(() => {
-			navigate("/intro")
-		})
+		// loginGoogleWithPopup().then(() => {
+		// 	navigate("/intro")
+		// })
+		navigate("/intro")
 	}, [loginGoogleWithPopup])
 
 	const handleLogout = useCallback(() => {
@@ -76,18 +116,7 @@ const Login = () => {
 	return (
 		<>
 			<div className="absolute inset-0 -z-10 h-full w-full">
-				<Canvas camera={{ position: [100, 0, 3] }}>
-					<OrbitControls
-						enableZoom={false}
-						autoRotate
-						autoRotateSpeed={0.2}
-					/>
-					<Center>
-						<Scene1 />
-					</Center>
-					<ambientLight intensity={1} />
-					<directionalLight intensity={0.5} position={[10, 10, 10]} />
-				</Canvas>
+				<Scene />
 			</div>
 			<div className="flex h-screen items-center justify-center">
 				<div className="flex flex-col items-center justify-center gap-5 rounded-3xl p-8">
