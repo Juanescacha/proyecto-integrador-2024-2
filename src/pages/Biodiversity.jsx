@@ -1,7 +1,7 @@
 import { Canvas, useThree } from "@react-three/fiber"
 import Staging from "@/components/staging/Staging.jsx"
 import { useEffect, useRef } from "react"
-import { Billboard, OrbitControls } from "@react-three/drei"
+import { Billboard, Html, OrbitControls } from "@react-three/drei"
 import BiodiversityScene from "@/components/BiodiversityScene.jsx"
 import KingRacoon from "@/components/KingRacoon.jsx"
 import { useNavigate } from "react-router-dom"
@@ -65,6 +65,17 @@ const Scene = () => {
 				position: [5.43, 7.77, 16.68],
 			}}>
 			<Camera />
+			<Html position={[-15, 10, 0]}>
+				<div className="flex w-56 flex-col gap-4 rounded-xl bg-blue-950 p-4 text-white">
+					<p>Que es la biodiversidad?</p>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+						Curabitur interdum, ante id vulputate blandit, nisi
+						libero dapibus nisl, quis bibendum ipsum nulla in purus.
+						Nullam volutpat.
+					</p>
+				</div>
+			</Html>
 			<Models />
 			<Staging />
 		</Canvas>

@@ -1,7 +1,7 @@
 import { Canvas, useThree } from "@react-three/fiber"
 import Staging from "@/components/staging/Staging.jsx"
 import { useEffect, useRef } from "react"
-import { OrbitControls } from "@react-three/drei"
+import { Html, OrbitControls } from "@react-three/drei"
 import DeforestationScene from "@/components/DeforestationScene.jsx"
 import KingRacoon from "@/components/KingRacoon.jsx"
 import { useNavigate } from "react-router-dom"
@@ -52,6 +52,17 @@ const Models = () => {
 				position={[-0.4, 5.7, 2]}
 				rotation={[6.2, Math.PI * 2, 0]}
 			/>
+			<Html position={[5, 10, 0]}>
+				<div className="flex w-56 flex-col gap-4 rounded-xl bg-blue-950 p-4 text-white">
+					<p>Que es la deforestacion?</p>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+						Curabitur interdum, ante id vulputate blandit, nisi
+						libero dapibus nisl, quis bibendum ipsum nulla in purus.
+						Nullam volutpat.
+					</p>
+				</div>
+			</Html>
 			<Lights />
 		</>
 	)
