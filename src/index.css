@@ -12,5 +12,6 @@ body {
 }
 
 canvas {
-	touch-action: none;
+	/*touch-action: none;*/
+	pointer-events: auto;
 }

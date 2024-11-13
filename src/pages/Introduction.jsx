@@ -3,6 +3,7 @@ import {
 	Environment,
 	GizmoHelper,
 	GizmoViewport,
+	Html,
 	OrbitControls,
 	PerspectiveCamera,
 	PivotControls,
@@ -13,6 +14,7 @@ import { Leva, useControls } from "leva"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Mountain from "@/components/Mountain"
+import Staging from "@/components/staging/Staging"
 
 const Tutorial = () => {
 	const navigate = useNavigate()
@@ -76,7 +78,7 @@ const Intro = ({ next }) => {
 			<button
 				onClick={next}
 				type="button"
-				className="flex items-center gap-6 text-3xl uppercase text-white">
+				className="flex items-center gap-6 text-3xl uppercase text-white opacity-0">
 				siguiente
 				<img
 					src="/assets/icons/right.svg"
@@ -107,12 +109,25 @@ const Introduction = () => {
 			<Leva hidden />
 			<div className="absolute inset-0 -z-10 h-full w-full">
 				<Canvas shadows>
+					<Staging />
 					<PerspectiveCamera
 						makeDefault
 						position={camera.position}
 						rotation={camera.rotation}
 					/>
 					{/*<OrbitControls makeDefault />*/}
+					<Html position={[3.5, 5.4, 0]}>
+						<button
+							type="button"
+							className="flex items-center gap-6 text-3xl uppercase text-white">
+							siguiente
+							<img
+								src="/assets/icons/right.svg"
+								className="h-6"
+								alt="right"
+							/>
+						</button>
+					</Html>
 					<Forest />
 					<Mountain scale={200} position={[400, -50, -300]} />
 					{/*<PivotControls*/}

@@ -1,10 +1,51 @@
-import { useGLTF } from "@react-three/drei"
+import { useCursor, useGLTF } from "@react-three/drei"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const Deforestation = (props) => {
 	const { nodes, materials } = useGLTF("/models/deforestation.glb")
+	const [isHovered, setIsHovered] = useState(false)
+	useCursor(isHovered)
+	const navigate = useNavigate()
+
+	useEffect(() => {
+		const handleKeyDown = (event) => {
+			if (event.key === "ArrowRight") {
+				activate()
+			} else if (event.key === "Enter" && isHovered) {
+				navigate("/deforestation")
+			} else {
+				deactivate()
+			}
+		}
+
+		window.addEventListener("keydown", handleKeyDown)
+
+		return () => {
+			window.removeEventListener("keydown", handleKeyDown)
+		}
+	}, [isHovered, navigate])
+
+	const activate = () => {
+		setIsHovered(true)
+	}
+
+	const deactivate = () => {
+		setIsHovered(false)
+	}
+
+	const handleClick = () => {
+		navigate("/deforestation")
+	}
 
 	return (
-		<group {...props} dispose={null}>
+		<group
+			{...props}
+			dispose={null}
+			onPointerOver={activate}
+			onPointerOut={deactivate}
+			onClick={handleClick}
+			scale={isHovered ? 0.25 : 0.2}>
 			<mesh
 				castShadow
 				receiveShadow

@@ -6,6 +6,7 @@ import { Canvas } from "@react-three/fiber"
 import { Center, Helper, OrbitControls } from "@react-three/drei"
 import Forest from "@/components/Forest"
 import { CameraHelper, DirectionalLightHelper } from "three"
+import Staging from "@/components/staging/Staging.jsx"
 
 const Scene = () => {
 	return (
@@ -17,6 +18,7 @@ const Scene = () => {
 			/>
 			<Models />
 			<Lights />
+			<Staging />
 		</Canvas>
 	)
 }
@@ -83,9 +85,10 @@ const Login = () => {
 	}, [user, navigate])
 
 	const handleLogin = useCallback(() => {
-		loginGoogleWithPopup().then(() => {
-			navigate("/intro")
-		})
+		// loginGoogleWithPopup().then(() => {
+		// 	navigate("/intro")
+		// })
+		navigate("/intro")
 	}, [loginGoogleWithPopup])
 
 	const handleLogout = useCallback(() => {
