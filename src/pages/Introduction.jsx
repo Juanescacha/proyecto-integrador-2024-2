@@ -3,17 +3,18 @@ import {
 	Environment,
 	GizmoHelper,
 	GizmoViewport,
+	Html,
 	OrbitControls,
 	PerspectiveCamera,
 	PivotControls,
 } from "@react-three/drei"
-import Scene1 from "@/components/Scene1"
+import Forest from "@/components/Forest"
 import KingRacoon from "@/components/KingRacoon"
 import { Leva, useControls } from "leva"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import Background from "@/components/Background.jsx"
-import Staging from "../components/staging/Staging"
+import Mountain from "@/components/Mountain"
+import Staging from "@/components/staging/Staging"
 
 const Tutorial = () => {
 	const navigate = useNavigate()
@@ -77,7 +78,7 @@ const Intro = ({ next }) => {
 			<button
 				onClick={next}
 				type="button"
-				className="flex items-center gap-6 text-3xl uppercase text-white">
+				className="flex items-center gap-6 text-3xl uppercase text-white opacity-0">
 				siguiente
 				<img
 					src="/assets/icons/right.svg"
@@ -108,15 +109,27 @@ const Introduction = () => {
 			<Leva hidden />
 			<div className="absolute inset-0 -z-10 h-full w-full">
 				<Canvas shadows>
-					<Staging/>
+					<Staging />
 					<PerspectiveCamera
 						makeDefault
 						position={camera.position}
 						rotation={camera.rotation}
 					/>
-					{/*<OrbitControls makeDefault position={[10, 10, 10]} />*/}
-					<Scene1 />
-					<Background scale={200} position={[400, -50, -300]} />
+					{/*<OrbitControls makeDefault />*/}
+					<Html position={[3.5, 5.4, 0]}>
+						<button
+							type="button"
+							className="flex items-center gap-6 text-3xl uppercase text-white">
+							siguiente
+							<img
+								src="/assets/icons/right.svg"
+								className="h-6"
+								alt="right"
+							/>
+						</button>
+					</Html>
+					<Forest />
+					<Mountain scale={200} position={[400, -50, -300]} />
 					{/*<PivotControls*/}
 					{/*	visible={true}*/}
 					{/*	annotations*/}
@@ -126,15 +139,28 @@ const Introduction = () => {
 					{/*	disableSliders>*/}
 					{/*</PivotControls>*/}
 					<KingRacoon position={[0, 2.5, 0]} />
-					<GizmoHelper alignment="bottom-right" margin={[80, 80]}>
-						<GizmoViewport
-							axisColors={["#9d4b4b", "#2f7f4f", "#3b5b9d"]}
-							labelColor="white"
-						/>
-					</GizmoHelper>
-					<ambientLight intensity={1} />
-					<directionalLight intensity={0.5} position={[10, 10, 10]} />
-					{/*<Environment preset="warehouse" />*/}
+					{/*<GizmoHelper alignment="bottom-right" margin={[80, 80]}>*/}
+					{/*	<GizmoViewport*/}
+					{/*		axisColors={["#9d4b4b", "#2f7f4f", "#3b5b9d"]}*/}
+					{/*		labelColor="white"*/}
+					{/*	/>*/}
+					{/*</GizmoHelper>*/}
+					<directionalLight
+						castShadow
+						shadow-mapSize-width={2048}
+						shadow-mapSize-height={2048}
+						intensity={5}
+						shadow-bias={-0.0006}
+						// shadow-normalBias={0.05}
+						position={[-55, 40, 10]}>
+						<orthographicCamera
+							attach="shadow-camera"
+							args={[-50, 30, 50, -5, -5, 200]}>
+							{/*<Helper type={CameraHelper} />*/}
+						</orthographicCamera>
+						{/*<Helper type={DirectionalLightHelper} />*/}
+					</directionalLight>
+					<ambientLight intensity={0.7} />
 				</Canvas>
 			</div>
 			<div className="flex h-screen flex-col items-end justify-start overflow-hidden">

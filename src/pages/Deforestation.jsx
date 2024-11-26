@@ -1,34 +1,23 @@
-import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { Perf } from "r3f-perf"
-import {
-	GizmoHelper,
-	GizmoViewport,
-	Helper,
-	OrbitControls,
-	PerspectiveCamera,
-	PivotControls,
-} from "@react-three/drei"
-import Forest from "@/components/Forest.jsx"
-import { useNavigate } from "react-router-dom"
-import Mountain from "@/components/Mountain"
-import Deforestation from "@/components/Deforestation"
-import Camp from "@/components/Camp"
-import { CameraHelper, DirectionalLightHelper } from "three"
-import { useEffect, useRef } from "react"
+import { Canvas, useThree } from "@react-three/fiber"
 import Staging from "@/components/staging/Staging.jsx"
+import { useEffect, useRef } from "react"
+import { Html, OrbitControls } from "@react-three/drei"
+import DeforestationScene from "@/components/DeforestationScene.jsx"
+import KingRacoon from "@/components/KingRacoon.jsx"
+import { useNavigate } from "react-router-dom"
 
 const Camera = () => {
 	const { camera } = useThree()
 	const ref = useRef()
 
 	useEffect(() => {
-		// window.addEventListener("keydown", (event) => {
-		// 	console.log("pos: ", camera.position)
-		// 	console.log("target: ", ref.current?.target)
-		// })
+		window.addEventListener("keydown", (event) => {
+			console.log("pos: ", camera.position)
+			console.log("target: ", ref.current?.target)
+		})
 	}, [])
 
-	return <OrbitControls makeDefault ref={ref} target={[9.99, 9.68, 2.95]} />
+	return <OrbitControls makeDefault ref={ref} target={[11.82, 4.26, -4.4]} />
 }
 
 const Lights = () => {
@@ -58,18 +47,23 @@ const Lights = () => {
 const Models = () => {
 	return (
 		<>
-			<Forest />
-			<Mountain scale={200} position={[400, -50, -300]} />
-			<Camp position={[10, 2.7, -15]} />
-			<Deforestation position={[30, 2.5, 1]} rotation={[0, 4, 0]} />
+			<DeforestationScene />
+			<KingRacoon
+				position={[-0.4, 5.7, 2]}
+				rotation={[6.2, Math.PI * 2, 0]}
+			/>
+			<Html position={[5, 10, 0]}>
+				<div className="flex w-56 flex-col gap-4 rounded-xl bg-blue-950 p-4 text-white">
+					<p>Que es la deforestacion?</p>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+						Curabitur interdum, ante id vulputate blandit, nisi
+						libero dapibus nisl, quis bibendum ipsum nulla in purus.
+						Nullam volutpat.
+					</p>
+				</div>
+			</Html>
 			<Lights />
-			{/*	Additional Debugging */}
-			<PivotControls
-				visible={true}
-				annotations
-				scale={1}
-				anchor={[0, 0, 0]}
-				depthTest={false}></PivotControls>
 		</>
 	)
 }
@@ -79,26 +73,16 @@ const Scene = () => {
 		<Canvas
 			shadows
 			camera={{
-				position: [0.54, 10.06, 14.03],
+				position: [-0.9, 9.24, 6.45],
 			}}>
 			<Camera />
 			<Models />
 			<Staging />
-
-			{/*
-			<GizmoHelper alignment="bottom-right" margin={[80, 80]}>
-				<GizmoViewport
-					axisColors={["#9d4b4b", "#2f7f4f", "#3b5b9d"]}
-					labelColor="white"
-				/>
-			</GizmoHelper>
-			*/}
-			{/*<Perf position="top-left" />*/}
 		</Canvas>
 	)
 }
 
-const Menu = () => {
+const Deforestation = () => {
 	const navigate = useNavigate()
 
 	return (
@@ -141,11 +125,11 @@ const Menu = () => {
 				</nav>
 				<div className="mt-10 flex flex-col items-start gap-10">
 					<div className="rounded-r-full bg-[#102C3E] p-6 text-3xl uppercase text-white">
-						selecciona la problemática
+						deforestación
 					</div>
 				</div>
 			</div>
 		</>
 	)
 }
-export default Menu
+export default Deforestation
