@@ -1,23 +1,100 @@
-import { Canvas, useThree } from "@react-three/fiber"
+import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import Staging from "@/components/staging/Staging.jsx"
-import { useEffect, useRef } from "react"
-import { Billboard, Html, OrbitControls } from "@react-three/drei"
+import { useEffect, useRef, useState } from "react"
+import {
+	Billboard,
+	Html,
+	OrbitControls,
+	Scroll,
+	ScrollControls,
+	useScroll,
+} from "@react-three/drei"
 import BiodiversityScene from "@/components/BiodiversityScene.jsx"
-import KingRacoon from "@/components/KingRacoon.jsx"
 import { useNavigate } from "react-router-dom"
+import gsap from "gsap"
+import ScrollTrigger from "gsap/ScrollTrigger"
+import { lerp } from "three/src/math/MathUtils"
+import Jueguito2 from "@/components/Jueguito2.jsx"
+
+gsap.registerPlugin(ScrollTrigger)
 
 const Camera = () => {
 	const { camera } = useThree()
-	const ref = useRef()
+	const ref = useRef(null)
+	const scroll = useScroll()
+
+	const cameraPoints = [
+		{
+			position: [68.69, 7.97, -42.15],
+			target: [-9.71, 7.71, 2.12],
+		},
+		{
+			position: [-47.48, 4.67, -53.52],
+			target: [-24.27, 5.24, -1.73],
+		},
+		{
+			position: [11.23, 5.1, 27.27],
+			target: [-3.04, 5.56, -16.69],
+		},
+	]
+
+	const snapPoints = [0, 0.5, 1]
+
+	const handleKeyDown = (event) => {
+		console.log("pos: ", camera.position)
+		console.log("target: ", ref.current?.target)
+
+		if (event.key === "ArrowRight") {
+			scroll.el.scrollTop += scroll.el.scrollHeight * 0.375
+		}
+		if (event.key === "ArrowLeft") {
+			scroll.el.scrollTop -= scroll.el.scrollHeight * 0.375
+		}
+	}
 
 	useEffect(() => {
-		window.addEventListener("keydown", (event) => {
-			console.log("pos: ", camera.position)
-			console.log("target: ", ref.current?.target)
-		})
+		window.addEventListener("keydown", handleKeyDown)
+
+		return () => {
+			window.removeEventListener("keydown", handleKeyDown)
+		}
 	}, [])
 
-	return <OrbitControls makeDefault ref={ref} target={[-7.59, 9.42, 5.19]} />
+	useFrame(() => {
+		// Normaliza el offset entre 0 y 2 para cubrir los 3 puntos
+		const offset = scroll.offset * 2
+
+		// Selecciona los puntos de interpolación
+		let startIndex = Math.floor(offset)
+		let endIndex = Math.min(startIndex + 1, cameraPoints.length - 1)
+
+		// Calcula el progreso de interpolación dentro de ese segmento
+		const progress = offset % 1
+
+		// Interpolación de posición
+		const lerpedPosition = cameraPoints.map((_, i) =>
+			lerp(
+				cameraPoints[startIndex].position[i],
+				cameraPoints[endIndex].position[i],
+				progress,
+			),
+		)
+
+		// Interpolación de target (lookAt)
+		const lerpedTarget = cameraPoints.map((_, i) =>
+			lerp(
+				cameraPoints[startIndex].target[i],
+				cameraPoints[endIndex].target[i],
+				progress,
+			),
+		)
+
+		// Actualiza posición de cámara
+		camera.position.set(...lerpedPosition)
+		camera.lookAt(...lerpedTarget)
+	})
+
+	// return <OrbitControls />
 }
 
 const Lights = () => {
@@ -48,10 +125,7 @@ const Models = () => {
 	return (
 		<>
 			<BiodiversityScene />
-			<KingRacoon
-				position={[0, 5.5, 16.68]}
-				rotation={[0, Math.PI / 2, 0]}
-			/>
+			<Jueguito2 position={[12, 7, 15]} rotation={[Math.PI / 4, 0, 0]} />
 			<Lights />
 		</>
 	)
@@ -59,24 +133,67 @@ const Models = () => {
 
 const Scene = () => {
 	return (
-		<Canvas
-			shadows
-			camera={{
-				position: [5.43, 7.77, 16.68],
-			}}>
-			<Camera />
-			<Html position={[-15, 10, 0]}>
-				<div className="flex w-56 flex-col gap-4 rounded-xl bg-blue-950 p-4 text-white">
-					<p>Que es la biodiversidad?</p>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Curabitur interdum, ante id vulputate blandit, nisi
-						libero dapibus nisl, quis bibendum ipsum nulla in purus.
-						Nullam volutpat.
-					</p>
-				</div>
-			</Html>
-			<Models />
+		<Canvas shadows>
+			<ScrollControls pages={3}>
+				{/*<Html position={[-15, 10, 0]}>*/}
+				{/*	<div className="flex w-56 flex-col gap-4 rounded-xl bg-blue-950 p-4 text-white">*/}
+				{/*		<p>Que es la biodiversidad?</p>*/}
+				{/*		<p>*/}
+				{/*			Lorem ipsum dolor sit amet, consectetur adipiscing*/}
+				{/*			elit. Curabitur interdum, ante id vulputate blandit,*/}
+				{/*			nisi libero dapibus nisl, quis bibendum ipsum nulla*/}
+				{/*			in purus. Nullam volutpat.*/}
+				{/*		</p>*/}
+				{/*	</div>*/}
+				{/*</Html>*/}
+				<Camera />
+				<Models />
+				<Scroll html>
+					<h1 className="absolute left-[5rem] top-[30vh] flex w-[500px] flex-col gap-4 rounded-lg bg-[#102C3E] p-6 text-white">
+						<span className="text-3xl font-semibold">
+							Que es la biodiversidad?
+						</span>
+						<p>
+							La biodiversidad es la variedad de animales y
+							plantas que viven en nuestro planeta. Pero cuando
+							algunas especies desaparecen, ese equilibrio se
+							rompe. Esto se llama pérdida de biodiversidad, y
+							sucede por cosas como la destrucción de bosques, la
+							contaminación, y la caza furtiva
+						</p>
+					</h1>
+					<h1 className="absolute left-[70rem] top-[140vh] flex w-[500px] flex-col gap-4 rounded-lg bg-[#102C3E] p-6 text-white">
+						<span className="text-3xl font-semibold">
+							Perdida de la biodiversidad
+						</span>
+						<p>
+							Los animales viven libres en sus hábitats, y cada
+							uno tiene un papel importante para que la Tierra
+							funcione bien. Pero hay un problema: algunas
+							personas los cazan de manera ilegal. Esto se llama
+							caza furtiva, y hace mucho daño.
+						</p>
+					</h1>
+					<h1 className="absolute left-[65rem] top-[257vh] flex w-[500px] flex-col gap-4 rounded-lg bg-[#102C3E] p-6 text-white">
+						<h1 className="text-5xl font-bold">QUIZ</h1>
+						<span className="text-3xl font-semibold">
+							cómo podemos protegerlos?
+						</span>
+						<p>
+							Aprende sobre los animales y habla con otros sobre
+							por qué es importante cuidarlos. evita comprar cosas
+							que estén hechas con partes de animales en peligro
+							apoya las reservas naturales y organizaciones que
+							trabajan para proteger a los animales.
+						</p>
+						<p>
+							Ayuda al mono a evitar los cazadores y devuelvelo
+							con su familia. Recoge las bananas para acumular
+							puntos y obtener una recompensa.
+						</p>
+					</h1>
+				</Scroll>
+			</ScrollControls>
 			<Staging />
 		</Canvas>
 	)
