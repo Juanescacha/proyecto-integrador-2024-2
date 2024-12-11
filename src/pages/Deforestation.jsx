@@ -14,6 +14,7 @@ import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { lerp } from "three/src/math/MathUtils"
 import Jueguito1 from "@/components/Jueguito1.jsx"
+import PostProcessing from "@/components/PostProcessing.jsx"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -61,7 +62,7 @@ const Camera = () => {
 
 	useFrame(() => {
 		// Normaliza el offset entre 0 y 2 para cubrir los 3 puntos
-		const offset = scroll.offset * 2
+		const offset = scroll?.offset * 2
 
 		// Selecciona los puntos de interpolación
 		let startIndex = Math.floor(offset)
@@ -134,20 +135,9 @@ const Scene = () => {
 	return (
 		<Canvas shadows>
 			<ScrollControls pages={3}>
-				<Camera />
 				<PostProcessing />
 				<Models />
-				{/*<Html position={[5, 10, 0]}>*/}
-				{/*	<div className="flex w-56 flex-col gap-4 rounded-xl bg-blue-950 p-4 text-white">*/}
-				{/*		<p>Que es la deforestacion?</p>*/}
-				{/*		<p>*/}
-				{/*			Lorem ipsum dolor sit amet, consectetur adipiscing*/}
-				{/*			elit. Curabitur interdum, ante id vulputate blandit,*/}
-				{/*			nisi libero dapibus nisl, quis bibendum ipsum nulla*/}
-				{/*			in purus. Nullam volutpat.*/}
-				{/*		</p>*/}
-				{/*	</div>*/}
-				{/*</Html>*/}
+				<Camera />
 				<Staging />
 				<Scroll html>
 					<h1 className="absolute left-[75rem] top-[40vh] flex w-[500px] flex-col gap-4 rounded-lg bg-[#102C3E] p-6 text-white">

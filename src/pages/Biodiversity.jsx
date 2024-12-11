@@ -15,7 +15,7 @@ import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { lerp } from "three/src/math/MathUtils"
 import Jueguito2 from "@/components/Jueguito2.jsx"
-import PostProcessing from "../components/PostProcessing"
+import PostProcessing from "@/components/PostProcessing.jsx"
 
 gsap.registerPlugin(ScrollTrigger)
 
