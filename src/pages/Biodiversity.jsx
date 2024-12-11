@@ -34,8 +34,8 @@ const Camera = () => {
 			target: [-24.27, 5.24, -1.73],
 		},
 		{
-			position: [11.23, 5.1, 27.27],
-			target: [-3.04, 5.56, -16.69],
+			position: [10.98, 8.63, 25.89],
+			target: [11.22, -7.49, 1.85],
 		},
 	]
 
@@ -95,7 +95,7 @@ const Camera = () => {
 		camera.lookAt(...lerpedTarget)
 	})
 
-	// return <OrbitControls />
+	// return <OrbitControls ref={ref} />
 }
 
 const Lights = () => {
@@ -136,17 +136,6 @@ const Scene = () => {
 	return (
 		<Canvas shadows>
 			<ScrollControls pages={3}>
-				{/*<Html position={[-15, 10, 0]}>*/}
-				{/*	<div className="flex w-56 flex-col gap-4 rounded-xl bg-blue-950 p-4 text-white">*/}
-				{/*		<p>Que es la biodiversidad?</p>*/}
-				{/*		<p>*/}
-				{/*			Lorem ipsum dolor sit amet, consectetur adipiscing*/}
-				{/*			elit. Curabitur interdum, ante id vulputate blandit,*/}
-				{/*			nisi libero dapibus nisl, quis bibendum ipsum nulla*/}
-				{/*			in purus. Nullam volutpat.*/}
-				{/*		</p>*/}
-				{/*	</div>*/}
-				{/*</Html>*/}
 				<Camera />
 				<PostProcessing />
 				<Models />
@@ -176,7 +165,7 @@ const Scene = () => {
 							caza furtiva, y hace mucho daño.
 						</p>
 					</h1>
-					<h1 className="absolute left-[65rem] top-[257vh] flex w-[500px] flex-col gap-4 rounded-lg bg-[#102C3E] p-6 text-white">
+					<h1 className="absolute left-[75rem] top-[240vh] flex w-[500px] flex-col gap-4 rounded-lg bg-[#102C3E] p-6 text-white">
 						<h1 className="text-5xl font-bold">QUIZ</h1>
 						<span className="text-3xl font-semibold">
 							cómo podemos protegerlos?
