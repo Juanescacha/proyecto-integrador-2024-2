@@ -126,7 +126,7 @@ const Models = () => {
 	return (
 		<>
 			<BiodiversityScene />
-			<Jueguito2 position={[8, 5, 20]} rotation={[Math.PI / 3, 0, -Math.PI / 8]} />
+			<Jueguito2 position={[9, 5, 21]} rotation={[Math.PI / 4, 0, 0]} />
 			<Lights />
 		</>
 	)
