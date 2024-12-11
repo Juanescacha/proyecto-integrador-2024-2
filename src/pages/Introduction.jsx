@@ -15,6 +15,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Mountain from "@/components/Mountain"
 import Staging from "@/components/staging/Staging"
+import PostProcessing from "../components/PostProcessing"
 
 const Tutorial = () => {
 	const navigate = useNavigate()
@@ -129,6 +130,7 @@ const Introduction = () => {
 						</button>
 					</Html>
 					<Forest />
+					<PostProcessing />
 					<Mountain scale={200} position={[400, -50, -300]} />
 					{/*<PivotControls*/}
 					{/*	visible={true}*/}

@@ -15,6 +15,7 @@ import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { lerp } from "three/src/math/MathUtils"
 import Jueguito2 from "@/components/Jueguito2.jsx"
+import PostProcessing from "../components/PostProcessing"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -125,7 +126,7 @@ const Models = () => {
 	return (
 		<>
 			<BiodiversityScene />
-			<Jueguito2 position={[12, 7, 15]} rotation={[Math.PI / 4, 0, 0]} />
+			<Jueguito2 position={[8, 5, 20]} rotation={[Math.PI / 3, 0, -Math.PI / 8]} />
 			<Lights />
 		</>
 	)
@@ -147,6 +148,7 @@ const Scene = () => {
 				{/*	</div>*/}
 				{/*</Html>*/}
 				<Camera />
+				<PostProcessing />
 				<Models />
 				<Scroll html>
 					<h1 className="absolute left-[5rem] top-[30vh] flex w-[500px] flex-col gap-4 rounded-lg bg-[#102C3E] p-6 text-white">

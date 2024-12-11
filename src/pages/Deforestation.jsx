@@ -14,6 +14,7 @@ import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { lerp } from "three/src/math/MathUtils"
 import Jueguito1 from "@/components/Jueguito1.jsx"
+import PostProcessing from "../components/PostProcessing"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -135,6 +136,7 @@ const Scene = () => {
 		<Canvas shadows>
 			<ScrollControls pages={3}>
 				<Camera />
+				<PostProcessing />
 				<Models />
 				{/*<Html position={[5, 10, 0]}>*/}
 				{/*	<div className="flex w-56 flex-col gap-4 rounded-xl bg-blue-950 p-4 text-white">*/}
