@@ -7,6 +7,7 @@ import { Center, Helper, OrbitControls } from "@react-three/drei"
 import Forest from "@/components/Forest"
 import { CameraHelper, DirectionalLightHelper } from "three"
 import Staging from "@/components/staging/Staging.jsx"
+import PostProcessing from "../components/PostProcessing"
 
 const Scene = () => {
 	return (
@@ -18,6 +19,7 @@ const Scene = () => {
 			/>
 			<Models />
 			<Lights />
+			<PostProcessing />
 			<Staging />
 		</Canvas>
 	)

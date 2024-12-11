@@ -16,6 +16,7 @@ import Camp from "@/components/Camp"
 import { CameraHelper, DirectionalLightHelper } from "three"
 import { useEffect, useRef } from "react"
 import Staging from "@/components/staging/Staging.jsx"
+import PostProcessing from "../components/PostProcessing"
 
 const Camera = () => {
 	const { camera } = useThree()
@@ -82,6 +83,7 @@ const Scene = () => {
 				position: [0.54, 10.06, 14.03],
 			}}>
 			<Camera />
+			<PostProcessing />
 			<Models />
 			<Staging />
 
