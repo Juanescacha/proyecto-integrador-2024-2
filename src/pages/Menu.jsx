@@ -22,10 +22,10 @@ const Camera = () => {
 	const ref = useRef()
 
 	useEffect(() => {
-		// window.addEventListener("keydown", (event) => {
-		// 	console.log("pos: ", camera.position)
-		// 	console.log("target: ", ref.current?.target)
-		// })
+		window.addEventListener("keydown", (event) => {
+			console.log("pos: ", camera.position)
+			console.log("target: ", ref.current?.target)
+		})
 	}, [])
 
 	return <OrbitControls makeDefault ref={ref} target={[9.99, 9.68, 2.95]} />
